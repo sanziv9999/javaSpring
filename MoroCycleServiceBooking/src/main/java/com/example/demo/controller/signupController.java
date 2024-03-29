@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,17 +26,18 @@ public class signupController {
 	
 	@PostMapping("/register")
 	public String signup(@ModelAttribute User u){
+		String hashPwd =DigestUtils.sha3_256Hex(u.getPassword());
+		u.setPassword(hashPwd);
 		uRepo.save(u);
 		return "index.html";
 	}
 	
 	@PostMapping("/login")
 	public String login(@ModelAttribute User u, Model model){
-		if(uRepo.existsByEmailAndPassword(u.getEmail(), u.getPassword())) {
+		if(uRepo.existsByEmailAndPassword(u.getEmail(), DigestUtils.sha3_256Hex(u.getPassword()))) {
 			return "admindash.html";
 		}
-		
-		
+
 		return "index.html";
 	}
 		
