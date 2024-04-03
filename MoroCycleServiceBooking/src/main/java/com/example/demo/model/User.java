@@ -16,6 +16,7 @@ public class User {
 	private String password;
 	private String username;
 	private String phone;
+	private String bikeno;
 	public int getId() {
 		return id;
 	}
@@ -46,6 +47,13 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String getBikeno() {
+		return bikeno;
+	}
+	public void setBikeno(String bikeno) {
+		this.bikeno = bikeno;
+	}
+	
 	
 
 	
