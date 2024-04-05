@@ -1,59 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
- <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet"> 
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin</title>
+    <!-- base:css -->
+    <link rel="stylesheet" th:href="@{/admin/vendors/typicons.font/font/typicons.css}">
+    <link rel="stylesheet" th:href="@{/admin/vendors/css/vendor.bundle.base.css}">
+    <!-- endinject --> 
+    <!-- plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" th:href="@{/admin/css/vertical-layout-light/style.css}">
+    <!-- endinject -->
+    <link rel="shortcut icon" th:href="@{/admin/images/favicon.png}">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_navbar.html -->
+     <div th:replace="~{fragments/adminNav :: adminNav}">
+     
+     </div>
+      
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link th:href="@{/lib/animate/animate.min.css}" rel="stylesheet">
-    <link th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" rel="stylesheet">
-    <link th:href="@{/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css}" rel="stylesheet" />
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-</head>
-<body>
-   <div class="main-panel">
-    <div class="content-wrapper">
-        <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Service Booking Form</h4>
-                        <form class="forms-sample" action="/serviceBookingForm" method="get">
-                            <div class="form-group">
-                                <label for="companyId">Company name</label>
-                                <select class="form-control" id="companyId" name="companyId">
-                                    <option value="">Select Company</option>
-                                    <option th:each="bmc : ${bmcList}" th:value="${bmc.id}" th:text="${bmc.companyName}"></option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="modelName">Model</label>
-                                <select class="form-control" id="modelName" name="modelName">
-                                    <option value="">Select Model</option>
-                                    <!-- Thymeleaf iteration to populate options -->
-                                    <option th:each="model : ${models}" th:value="${model.id}" th:text="${model.modelName}"></option>
-                                </select>
-                            </div>
-                            <br>
-                            <button class="btn btn-primary" type="submit">Save</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+	<div th:replace="~{fragments/bookingForm :: dashBookingForm}"></div>
     </div>
-</div>
-</body>
+    <!-- container-scroller -->
+    <!-- base:js -->
+    <script src="/admin/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="/admin/js/off-canvas.js"></script>
+    <script src="/admin/js/hoverable-collapse.js"></script>
+    <script src="/admin/js/template.js"></script>
+    <script src="admin/js/settings.js"></script>
+    <script src="admin/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- plugin js for this page -->
+    <script src="/admin/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="admin/vendors/chart.js/Chart.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- Custom js for this page-->
+    <script src="/admin/js/dashboard.js"></script>
+    <!-- End custom js for this page-->
+  </body>
 </html>

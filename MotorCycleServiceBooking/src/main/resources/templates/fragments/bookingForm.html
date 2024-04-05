@@ -1,0 +1,103 @@
+<div th:fragment="dashBookingForm">
+    <div class="container-fluid page-body-wrapper">
+    
+        <div class="theme-setting-wrapper">
+          <div id="settings-trigger"><i class="typcn typcn-cog-outline"></i></div>
+          <div id="theme-settings" class="settings-panel">
+            <i class="settings-close typcn typcn-delete-outline"></i>
+            <p class="settings-heading">SIDEBAR SKINS</p>
+            <div class="sidebar-bg-options" id="sidebar-light-theme">
+              <div class="img-ss rounded-circle bg-light border mr-3"></div>
+              Light
+            </div>
+            <div class="sidebar-bg-options selected" id="sidebar-dark-theme">
+              <div class="img-ss rounded-circle bg-dark border mr-3"></div>
+              Dark
+            </div>
+            <p class="settings-heading mt-2">HEADER SKINS</p>
+            <div class="color-tiles mx-0 px-4">
+              <div class="tiles success"></div>
+              <div class="tiles warning"></div>
+              <div class="tiles danger"></div>
+              <div class="tiles primary"></div>
+              <div class="tiles info"></div>
+              <div class="tiles dark"></div>
+              <div class="tiles default border"></div>
+            </div>
+          </div>
+        </div>
+      
+      
+	   <div th:replace="~{fragments/adminSideNav :: adminSideNav}">
+	   </div>
+        
+        
+        <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+             <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Service Booking Form</h4>
+                  <p class="card-description">
+                    Fill the form below carefully
+                  </p>
+                  <form class="forms-sample" action="/serviceBook" method="POST">
+                                <div class="form-group">
+                                    <label for="Username">Username</label>
+                                    <input type="text" class="form-control" placeholder="Username" name="username"> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="Email">Email</label>
+                                    <input type="email" class="form-control" placeholder="Email" name="email"> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="Date">Date</label>
+                                    <input type="date" class="form-control" placeholder="Date"  name="date"> 
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="BikeNo">Vehicle Number</label>
+                                    <input type="text" class="form-control" placeholder="Bike Number" name="vehicleNo"> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="companyId">Company name</label>
+                                    <select class="form-control" id="companyId" name="companyName" >
+                                        <option value="">Select Company</option>
+                                        <option th:each="bmc : ${bmcList}" th:value="${bmc.companyName}" th:text="${bmc.companyName}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modelName">Model</label>
+                                    <select class="form-control" id="modelName" name="bikeModel">
+                                        <option value="">Select Model</option>
+                                        <option th:each="model : ${bmList}" th:value="${model.modelName}" th:text="${model.modelName}"></option>
+                                    </select>
+                                </div>
+                                
+                                <input type="hidden" name="appliedDate" id="currentDateInput" value="">
+                                <br>
+                                <button class="btn btn-primary" type="submit">Apply</button>
+                            </form>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+         </div>
+        </div>
+	  
+      </div>
+      
+    <script>
+    // Get the current date
+    let currentDate = new Date();
+    
+    // Format the date to YYYY-MM-DD (as required by type="date")
+    let formattedDate = currentDate.toISOString().slice(0, 10);
+    
+    // Set the value of the hidden input field
+    document.getElementById("currentDateInput").value = formattedDate;S
+  </script>
+        
+        </div>
