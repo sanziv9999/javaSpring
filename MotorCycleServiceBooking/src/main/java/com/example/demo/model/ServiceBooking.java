@@ -28,6 +28,9 @@ public class ServiceBooking {
 	private String companyName;
 	
 	private String bikeModel;
+	
+	private String status;
+	
 
 	public int getId() {
 		return id;
@@ -94,6 +97,15 @@ public class ServiceBooking {
 	public void setBikeModel(String bikeModel) {
 		this.bikeModel = bikeModel;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	
 	
 	

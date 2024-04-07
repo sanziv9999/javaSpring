@@ -55,12 +55,16 @@ public class signupController {
 		return "index.html";
 	}
 	
-	@GetMapping("/dashboard")
+	@GetMapping("/adminDash")
 	public String dashboard(@ModelAttribute User u, HttpSession session) {
 		
 	
-		return "userdash.html";
+		return "adminDash.html";
 	}
+	
+	
+	
+	
 	
 	}
 	

@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
+@DynamicUpdate
 public class BikeModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

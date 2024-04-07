@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.model.BikeManufactureCompany;
 import com.example.demo.model.BikeModel;
 import com.example.demo.model.ServiceBooking;
+import com.example.demo.model.User;
 import com.example.demo.repository.BikeManufactureCompanyRepository;
 import com.example.demo.repository.BikeModelRepository;
 import com.example.demo.repository.ServiceBookingRepository;
+import com.example.demo.repository.UserRepository;
 
 @Controller
 public class ServiceBookingForm {
@@ -26,6 +28,11 @@ public class ServiceBookingForm {
 	
 	@Autowired
 	private ServiceBookingRepository sbRepo;
+	
+	@Autowired
+	private UserRepository uRepo;
+	
+	
 	
 	
 	
@@ -55,6 +62,16 @@ public class ServiceBookingForm {
 		
 		return "serviceBookingForm.html";
 		
+	}
+	
+	@GetMapping("serviceBookedPage")
+	public String serviceBookedPage( Model model) {
+		
+		List<ServiceBooking> sbList = sbRepo.findAll();
+		
+		model.addAttribute("sbList",sbList);
+		
+		return "serviceBookedPage.html";
 	}
 	
 }

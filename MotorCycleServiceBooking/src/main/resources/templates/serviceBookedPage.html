@@ -24,21 +24,10 @@
      </div>
       
 
-	<div th:replace="~{fragments/bookingForm :: dashBookingForm}"></div>
+	<div th:replace="~{fragments/serviceBookedPage :: serviceBookedPage}"></div>
     </div>
     <!-- container-scroller -->
     <!-- base:js -->
-    
-     <script>
-    // Get the current date
-    let currentDate = new Date();
-    
-    // Format the date to YYYY-MM-DD (as required by type="date")
-    let formattedDate = currentDate.toISOString().slice(0, 10);
-    
-    // Set the value of the hidden input field
-    document.getElementById("currentDateInput").value = formattedDate;
-  </script>
     <script src="/admin/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->
