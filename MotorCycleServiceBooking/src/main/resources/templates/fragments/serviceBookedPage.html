@@ -93,6 +93,12 @@
                           <th>
                             Booked Date
                           </th>
+                            <th>
+                            Service Type
+                          </th>  
+                          <th>
+                            Service Name
+                          </th>
                           <th>
                             Status
                           </th>
@@ -108,7 +114,22 @@
                           <td th:text="${sb.vehicleNo}"></td>
                           <td th:text="${sb.appliedDate}"></td>
                           <td th:text="${sb.date}"></td>
-                          <td th:text="${sb.status}"></td>
+                          <td th:text="${sb.serviceType}"></td>
+                          <td th:text="${sb.serviceName}"></td>
+                       		<td>
+						    <form id="statusForm" action="submitStatus}" method="post">
+						        <div class="form-group">
+						            <select class="form-control" id="status" name="status" th:each="ws : ${wsList}" th:value="${ws.status}" th:text="${ws.status}" th:onchange="${statusForm.submit()}">
+						                <option value="">status</option>
+						                <!-- Thymeleaf loop to generate options -->
+						                <option th:value="${ws.status}" th:text="${ws.status}">Status Text</option>
+						            </select>
+						        </div>
+						        <button type="submit" style="display:none;"></button>
+						    </form>
+						</td>
+
+
                         </tr>
                       </tbody>
                     </table>

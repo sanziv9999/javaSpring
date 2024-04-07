@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.model.BikeManufactureCompany;
 import com.example.demo.model.BikeModel;
 import com.example.demo.model.ServiceBooking;
+import com.example.demo.model.ServiceSubCategory;
+import com.example.demo.model.ServiceType;
 import com.example.demo.model.User;
+import com.example.demo.model.WorkStatus;
 import com.example.demo.repository.BikeManufactureCompanyRepository;
 import com.example.demo.repository.BikeModelRepository;
 import com.example.demo.repository.ServiceBookingRepository;
+import com.example.demo.repository.ServiceSubCategoryRepository;
+import com.example.demo.repository.ServiceTypeRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.WorkStatusRepository;
 
 @Controller
 public class ServiceBookingForm {
@@ -32,6 +38,17 @@ public class ServiceBookingForm {
 	@Autowired
 	private UserRepository uRepo;
 	
+	@Autowired
+	private ServiceTypeRepository stRepo;
+	
+	@Autowired
+	private ServiceSubCategoryRepository sscRepo;
+	
+	@Autowired
+	private WorkStatusRepository wsRepo;
+	
+	
+	
 	
 	
 	
@@ -46,6 +63,18 @@ public class ServiceBookingForm {
 		
 		List<BikeModel> bmList = bmRepo.findAll();
 		model.addAttribute("bmList", bmList);
+		
+		List<ServiceType> stList = stRepo.findAll();
+		model.addAttribute("stList", stList );
+		
+		
+		List<ServiceSubCategory> sscList = sscRepo.findAll();
+		model.addAttribute("sscList", sscList);
+		
+		List<WorkStatus> wsList = wsRepo.findAll();
+		model.addAttribute("wsList", wsList);
+				
+		
 		 
 		return "serviceBookingForm.html";
 	}
@@ -57,6 +86,15 @@ public class ServiceBookingForm {
 		
 		List<BikeModel> bmList = bmRepo.findAll();
 		model.addAttribute("bmList", bmList);
+		
+		List<ServiceType> stList = stRepo.findAll();
+		model.addAttribute("stList", stList );
+		
+		
+		List<ServiceSubCategory> sscList = sscRepo.findAll();
+		model.addAttribute("sscList", sscList);
+		
+		
 		
 		sbRepo.save(sb);
 		
@@ -70,6 +108,9 @@ public class ServiceBookingForm {
 		List<ServiceBooking> sbList = sbRepo.findAll();
 		
 		model.addAttribute("sbList",sbList);
+		
+		List<WorkStatus> wsList = wsRepo.findAll();
+		model.addAttribute("wsList", wsList);
 		
 		return "serviceBookedPage.html";
 	}

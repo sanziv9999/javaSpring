@@ -29,6 +29,12 @@ public class ServiceBooking {
 	
 	private String bikeModel;
 	
+	private String serviceType;
+	
+	private String serviceName;
+	
+	
+	
 	private String status;
 	
 
@@ -105,6 +111,24 @@ public class ServiceBooking {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
+	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+	
+	
 	
 	
 	
