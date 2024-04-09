@@ -57,16 +57,28 @@ public class signupController {
 	}
 	
 	@GetMapping("/adminDash")
-	public String dashboard(@ModelAttribute User u, HttpSession session) {
+	public String dashboard(HttpSession session, Model model) {
 		
 	
+		String username = (String) session.getAttribute("username");
+		model.addAttribute(username, username);
 		return "adminDash.html";
 	}
 	
 	@GetMapping("dashboard")
-	public String dashborad(HttpSession session, @ModelAttribute User u) {
-		
+	public String dashborad(HttpSession session,Model model) {
+
+		String username = (String) session.getAttribute("username");
+		model.addAttribute(username, username);
 		return "userdash.html";
+	}
+	
+	@GetMapping("logout")
+	public String logout(HttpSession session){
+		session.invalidate();
+		
+		return "index.html";
+		
 	}
 	
 	

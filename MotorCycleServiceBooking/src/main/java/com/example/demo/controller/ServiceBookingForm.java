@@ -30,6 +30,8 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.WorkStatusRepository;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ServiceBookingForm {
 
@@ -57,7 +59,11 @@ public class ServiceBookingForm {
 	
 	
 	
-	
+	@GetMapping("book")
+	public String homePageBook(Model model, HttpSession session){
+		String username = (String) session.getAttribute("username");
+		return "servicebookingForm.html";
+	}
 	
 	
 	@GetMapping("/serviceBookingForm")
