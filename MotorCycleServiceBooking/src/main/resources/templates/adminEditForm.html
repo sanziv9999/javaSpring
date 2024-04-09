@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>User</title>
+    <title>Admin</title>
     <!-- base:css -->
     <link rel="stylesheet" th:href="@{/admin/vendors/typicons.font/font/typicons.css}">
     <link rel="stylesheet" th:href="@{/admin/vendors/css/vendor.bundle.base.css}">
@@ -15,6 +15,8 @@
     <link rel="stylesheet" th:href="@{/admin/css/vertical-layout-light/style.css}">
     <!-- endinject -->
     <link rel="shortcut icon" th:href="@{/admin/images/favicon.png}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="/admin/vendors/mdi/css/materialdesignicons.min.css">
   </head>
   <body>
     <div class="container-scroller">
@@ -24,10 +26,21 @@
      </div>
       
 
-	<div th:replace="~{fragments/bookingForm :: dashBookingForm}"></div>
+	<div th:replace="~{fragments/adminStatusEditForm:: StatusEdit}"></div>
     </div>
     <!-- container-scroller -->
     <!-- base:js -->
+    
+     <script>
+    // Get the current date
+    let currentDate = new Date();
+    
+    // Format the date to YYYY-MM-DD (as required by type="date")
+    let formattedDate = currentDate.toISOString().slice(0, 10);
+    
+    // Set the value of the hidden input field
+    document.getElementById("currentDateInput").value = formattedDate;
+  </script>
     <script src="/admin/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page-->

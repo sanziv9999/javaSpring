@@ -41,11 +41,12 @@ public class signupController {
 	public String login(@ModelAttribute User u, Model model,HttpSession session){
 		if(uRepo.existsByEmailAndPassword(u.getEmail(), DigestUtils.sha3_256Hex(u.getPassword()))) {
 			String username = uRepo.findUsernameByEmail(u.getEmail());
+			String role = uRepo.findRoleByEmail(u.getEmail());
 			if(username!=null) {
-				session.setAttribute("username", u.getUsername());
+				session.setAttribute("role", role );
 				model.addAttribute("email",u.getEmail());
 				session.setAttribute("username", username);
-				System.out.println(session.getAttribute("username"));
+				System.out.println(session.getAttribute("role"));
 				return "index.html";
 			}
 		
@@ -62,6 +63,11 @@ public class signupController {
 		return "adminDash.html";
 	}
 	
+	@GetMapping("dashboard")
+	public String dashborad(HttpSession session, @ModelAttribute User u) {
+		
+		return "userdash.html";
+	}
 	
 	
 	

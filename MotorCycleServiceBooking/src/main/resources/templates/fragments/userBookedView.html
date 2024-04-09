@@ -1,4 +1,4 @@
-<div th:fragment="serviceBookedPage">
+<div th:fragment="userBookedView">
     <div class="container-fluid page-body-wrapper">
     
         <div class="theme-setting-wrapper">
@@ -28,7 +28,7 @@
         </div>
       
       
-	   <div th:replace="~{fragments/adminSideNav :: adminSideNav}">
+	   <div th:replace="~{fragments/userSideNav :: userSideNav}">
 	   </div>
         
 	    <div class="main-panel">
@@ -119,14 +119,10 @@
                           <td th:text="${sb.serviceType}"></td>
                           <td th:text="${sb.serviceName}"></td>
        					<td th:text="${sb.status}"></td>
-						<td>
-						<div class="btn-group" role="group" aria-label="Edit and Delete Buttons">
-						 <a th:href="@{'/statusEdit/'+${sb.id}}" type="button btn" class="btn btn-sm btn-secondary btn-icon-text">Edit                    
-	                        </a>
-                        <a th:href="@{'/deleteData/'+${sb.id}}" type="button btn" class="btn btn-sm btn-danger btn-icon-text">Delete                       
-	                        </a>
-							</td>	
-						</div>
+						<td >
+						 <a th:href="@{'/cancelBooking/'+${sb.id}}" type="button btn" class="btn btn-danger btn-icon-text">Cancel Booking                          
+                        </a>
+						</td>	
 
                         </tr>
                       </tbody>
