@@ -28,6 +28,7 @@ import com.example.demo.repository.ServiceSubCategoryRepository;
 import com.example.demo.repository.ServiceTypeRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.WorkStatusRepository;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 @Controller
 public class ServiceBookingForm {
@@ -211,6 +212,32 @@ public class ServiceBookingForm {
 		return "serviceBookedPage.html";
 	}
 	
+	
+	@GetMapping("bikeCompanyAndModels")
+	public String bikeCompanyAndModels(Model model){
+		
+		List<BikeManufactureCompany> bmcList=bmcRepo.findAll();
+		model.addAttribute("bmcList", bmcList);
+		
+		List<BikeModel> bmList = bmRepo.findAll();
+		model.addAttribute("bmList", bmList);
+		
+		return "bikeCompany.html";
+	}
+	
+	@GetMapping("servicesTypes")
+	
+	public String servicesTypes(Model model){
+		
+		List<ServiceType> stList = stRepo.findAll();
+		model.addAttribute("stList", stList );
+		
+		
+		List<ServiceSubCategory> sscList = sscRepo.findAll();
+		model.addAttribute("sscList", sscList);
+		
+		return "serviceDetails.html";
+	}
 	
 	
 	
