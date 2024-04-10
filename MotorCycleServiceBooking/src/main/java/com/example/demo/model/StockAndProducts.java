@@ -15,23 +15,20 @@ public class StockAndProducts {
 	
 	private String itemName;
 	
+	private String itemPic;
+	
 	private String itemType;
 	
 	private String brand;
 	
-	private String modelNo;
+	private String model;
 	
 	private int quantity;
 	
-	private int minimumStockLevel;
-	
 	private float unitPrice;
-	
-	private String supplier;
 	
 	private String purchasedDate;
 	
-	private String lastRestocked;
 	
 	private String description;
 
@@ -67,13 +64,6 @@ public class StockAndProducts {
 		this.brand = brand;
 	}
 
-	public String getModelNo() {
-		return modelNo;
-	}
-
-	public void setModelNo(String modelNo) {
-		this.modelNo = modelNo;
-	}
 
 	public int getQuantity() {
 		return quantity;
@@ -83,14 +73,7 @@ public class StockAndProducts {
 		this.quantity = quantity;
 	}
 
-	public int getMinimumStockLevel() {
-		return minimumStockLevel;
-	}
-
-	public void setMinimumStockLevel(int minimumStockLevel) {
-		this.minimumStockLevel = minimumStockLevel;
-	}
-
+	
 	public float getUnitPrice() {
 		return unitPrice;
 	}
@@ -99,13 +82,7 @@ public class StockAndProducts {
 		this.unitPrice = unitPrice;
 	}
 
-	public String getSupplier() {
-		return supplier;
-	}
-
-	public void setSupplier(String supplier) {
-		this.supplier = supplier;
-	}
+	
 
 	public String getPurchasedDate() {
 		return purchasedDate;
@@ -115,13 +92,6 @@ public class StockAndProducts {
 		this.purchasedDate = purchasedDate;
 	}
 
-	public String getLastRestocked() {
-		return lastRestocked;
-	}
-
-	public void setLastRestocked(String lastRestocked) {
-		this.lastRestocked = lastRestocked;
-	}
 
 	public String getDescription() {
 		return description;
@@ -129,6 +99,22 @@ public class StockAndProducts {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getItemPic() {
+		return itemPic;
+	}
+
+	public void setItemPic(String itemPic) {
+		this.itemPic = itemPic;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
 	}
 	
 	

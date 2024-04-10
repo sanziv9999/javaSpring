@@ -14,5 +14,13 @@ public class stockAndProductController {
 	@Autowired
 	private StockAndProductsRepository sapRepo;
 	
+	
+	@GetMapping("StockManagement")
+	public String StockManagement() {
+		
+		
+		return "Stocks.html";
+	}
+	
 
 }

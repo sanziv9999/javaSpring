@@ -46,6 +46,7 @@ public class signupController {
 				session.setAttribute("role", role );
 				model.addAttribute("email",u.getEmail());
 				session.setAttribute("username", username);
+				session.setMaxInactiveInterval(30);
 				System.out.println(session.getAttribute("role"));
 				return "index.html";
 			}
@@ -59,18 +60,28 @@ public class signupController {
 	@GetMapping("/adminDash")
 	public String dashboard(HttpSession session, Model model) {
 		
-	
+		if(session.getAttribute("username")!=null) {
 		String username = (String) session.getAttribute("username");
 		model.addAttribute(username, username);
 		return "adminDash.html";
+		}else {
+			return "index.html";
+		}
+		
 	}
 	
 	@GetMapping("dashboard")
 	public String dashborad(HttpSession session,Model model) {
-
+		if(session.getAttribute("username")!=null) {
+			
+	
 		String username = (String) session.getAttribute("username");
 		model.addAttribute(username, username);
 		return "userdash.html";
+		
+		}else {
+			return "index.html";
+		}
 	}
 	
 	@GetMapping("logout")
