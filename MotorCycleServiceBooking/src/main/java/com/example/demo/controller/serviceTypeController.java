@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,13 +24,8 @@ public class serviceTypeController {
 	private ServiceSubCategoryRepository sscRepo;
 	
 	
-	@GetMapping("/addServiceType")
-	public String serviceType(){
-		return "addServiceType.html";
-	}
-	
 	@PostMapping("/addServiceTypeForm")
-	public String addServiceType(@ModelAttribute ServiceSubCategory ssc, @RequestParam("serviceName") String serviceName, @RequestParam("serviceType") String serviceType, @RequestParam("price") float price ){
+	public String addServiceType(@ModelAttribute ServiceSubCategory ssc, @RequestParam("serviceName") String serviceName, @RequestParam("serviceType") String serviceType, @RequestParam("price") float price , Model model){
 		
 		Optional<ServiceType> existingServiceType = stRepo.findByServiceType(serviceType);
 		
@@ -48,9 +45,16 @@ public class serviceTypeController {
 		subCat.setPrice(price);
 		sscRepo.save(subCat);
 		
+		List<ServiceType> stList = stRepo.findAll();
+		model.addAttribute("stList", stList );
 		
 		
-		return "addServiceType.html";
+		List<ServiceSubCategory> sscList = sscRepo.findAll();
+		model.addAttribute("sscList", sscList);
+		
+		
+		
+		return "serviceDetails.html";
 	}
 	
 	
