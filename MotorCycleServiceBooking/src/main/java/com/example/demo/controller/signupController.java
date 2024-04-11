@@ -45,9 +45,11 @@ public class signupController {
 			if(username!=null) {
 				session.setAttribute("role", role );
 				model.addAttribute("email",u.getEmail());
+				session.setAttribute("email", u.getEmail());
 				session.setAttribute("username", username);
 				session.setMaxInactiveInterval(30);
 				System.out.println(session.getAttribute("role"));
+				System.out.println(session.getAttribute("email"));
 				return "index.html";
 			}
 		

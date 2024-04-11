@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.mailsender.ServiceBookedMail;
+import com.example.demo.mailsender.mailSender;
 import com.example.demo.model.BikeManufactureCompany;
 import com.example.demo.model.BikeModel;
 import com.example.demo.model.ServiceBooking;
@@ -92,7 +94,7 @@ public class ServiceBookingForm {
 	}
 	
 	@PostMapping("/serviceBook")
-	public String serviceBook(Model model, @ModelAttribute ServiceBooking sb){
+	public String serviceBook(Model model, @ModelAttribute ServiceBooking sb, HttpSession session, @RequestParam("date") String date){
 		List<BikeManufactureCompany> bmcList=bmcRepo.findAll();
 		model.addAttribute("bmcList", bmcList);
 		
@@ -106,9 +108,11 @@ public class ServiceBookingForm {
 		List<ServiceSubCategory> sscList = sscRepo.findAll();
 		model.addAttribute("sscList", sscList);
 		
-		
+		String email = (String) session.getAttribute("email");
 		
 		sbRepo.save(sb);
+		new ServiceBookedMail().sendBookedMessage(email, date);
+		
 		
 		return "serviceBookingForm.html";
 		
@@ -128,9 +132,9 @@ public class ServiceBookingForm {
 	}
 	
 	@GetMapping("userBookedView")
-	public String userBookedView( Model model) {
+	public String userBookedView( Model model, HttpSession session) {
 		
-		List<ServiceBooking> sbList = sbRepo.findAll();
+		List<ServiceBooking> sbList = sbRepo.findByEmail((String) session.getAttribute("email"));
 		
 		model.addAttribute("sbList",sbList);
 		
@@ -141,13 +145,14 @@ public class ServiceBookingForm {
 	}
 	
 	@GetMapping("/cancelBooking/{id}")
-	public String calcelBooking(Model model, @PathVariable int id) {
+	public String calcelBooking(Model model, @PathVariable int id, HttpSession session) {
 		
 		try{
 			ServiceBooking sb = sbRepo.getById(id);
 			if(sb != null) {
 				sb.setStatus("Cancelled");
 				sbRepo.save(sb);
+				new ServiceBookedMail().sendCancelledMessage((String) session.getAttribute("email"));
 			}else {
 				System.out.println("Booked id not found");
 			}
@@ -155,7 +160,7 @@ public class ServiceBookingForm {
 			e.printStackTrace();
 		}
 		
-		List<ServiceBooking> sbList = sbRepo.findAll();
+		List<ServiceBooking> sbList = sbRepo.findByEmail((String) session.getAttribute("email"));
 		model.addAttribute("sbList",sbList);
 		return "userBookedView.html";
 	}
@@ -204,7 +209,7 @@ public class ServiceBookingForm {
 	}
 	
 	@PostMapping("editBookedService")
-	public String editBookedService(Model model ,@ModelAttribute ServiceBooking sb) { 
+	public String editBookedService(Model model ,@ModelAttribute ServiceBooking sb, HttpSession session) { 
 		
 		sbRepo.save(sb);
 		
