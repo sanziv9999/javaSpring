@@ -503,23 +503,83 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
-	<script>
-	var loginModal = document.getElementById('LoginModal');
-	  var signupModal = document.getElementById('SignupModal');
-
-	  loginModal.addEventListener('show.bs.modal', function () {
-	    if (signupModal.classList.contains('show')) {
-	      var bsModal = bootstrap.Modal.getInstance(signupModal);
-	      bsModal.hide();
+	<script th:inline="javascript">
+		var loginModal = document.getElementById('LoginModal');
+		var signupModal = document.getElementById('SignupModal');
+		var emailModal = document.getElementById('ForgotPasswordModal');
+		
+	
+		loginModal.addEventListener('show.bs.modal', function () {
+		  if (signupModal.classList.contains('show')) {
+		    var bsModal = bootstrap.Modal.getInstance(signupModal);
+		    bsModal.hide();
+		  }
+		});
+	
+		signupModal.addEventListener('show.bs.modal', function () {
+		  if (loginModal.classList.contains('show')) {
+		    var bsModal = bootstrap.Modal.getInstance(loginModal);
+		    bsModal.hide();
+		  }
+		});
+		
+		emailModal.addEventListener('show.bs.modal', function () {
+			  if (loginModal.classList.contains('show')) {
+			    var bsModal = bootstrap.Modal.getInstance(loginModal);
+			    bsModal.hide();
+			  }
+			});
+			  
+			  
+			  
+			  
+	  function checkURL(urlPattern) {
+	        return window.location.href.indexOf(urlPattern) > -1;
 	    }
-	  });
 
-	  signupModal.addEventListener('show.bs.modal', function () {
-	    if (loginModal.classList.contains('show')) {
-	      var bsModal = bootstrap.Modal.getInstance(loginModal);
-	      bsModal.hide();
+	    // Function to display the modal
+	    function displayModal() {
+	        var otpModal = document.getElementById("OtpModal");
+	        if (otpModal) {
+	            var myModal = new bootstrap.Modal(otpModal);
+	            myModal.show();
+	        }
 	    }
-	  });
+
+	    // Check if the current URL matches the desired pattern and display the modal
+	    document.addEventListener("DOMContentLoaded", function() {
+	        var urlPattern = "/otpSender"; // Change this to your desired URL pattern
+	        if (checkURL(urlPattern)) {
+	            displayModal();
+	        }
+	    });
+	    
+	
+
+	    // Function to display the modal
+	    function displayNewPasswordModal() {
+	        var NewPasswordModal = document.getElementById("NewPasswordModal");
+	        if (NewPasswordModal) {
+	            var myModal = new bootstrap.Modal(NewPasswordModal);
+	            myModal.show();
+	        }else{
+	        	displayModal();
+	        }
+	    }
+
+	    // Check if session status is 'matched' and display the modal
+	    document.addEventListener("DOMContentLoaded", function() {
+	        if (checkSessionStatus()) {
+	            displayNewPasswordModal();
+	        }
+	    });
+	
+	    
+	    
+	    
+	    
+	    
+	    
 	  </script>
 	  
   	  <script>
