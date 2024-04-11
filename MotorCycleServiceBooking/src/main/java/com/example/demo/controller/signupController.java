@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.mailsender.PasswordChangeMessage;
 import com.example.demo.mailsender.mailSender;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
@@ -124,8 +128,26 @@ public class signupController {
 		  return "index.html" ; 
 	  }
 	  
-	  return "index.html" ; }
+	  	
+	    return "index.html";
+	  }
 	  
+	  
+	  @PostMapping("newPassword")
+	  public String newPassword(@ModelAttribute User u, HttpSession session, @RequestParam("newPassword") String newPassword){
+		  String email =  (String) session.getAttribute("email");
+		  if(email != null) {
+			  	String hashPwd = DigestUtils.sha3_256Hex(newPassword);
+				u.setPassword(hashPwd);
+			  	uRepo.updatePasswordByEmail(email, hashPwd);
+				new PasswordChangeMessage().sendPasswordChangeMessage(email);
+				System.out.println("password changed successfully" + hashPwd);
+				session.invalidate();
+		  }
+		  return "index.html";
+		  
+		  
+	  }
 	 
 
 }

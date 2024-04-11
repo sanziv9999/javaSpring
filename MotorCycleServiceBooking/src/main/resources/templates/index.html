@@ -539,7 +539,7 @@
 
 	    // Function to display the modal
 	    function displayModal() {
-	        var otpModal = document.getElementById("OtpModal");
+	        var otpModal = document.getElementById("otpModal");
 	        if (otpModal) {
 	            var myModal = new bootstrap.Modal(otpModal);
 	            myModal.show();
@@ -554,30 +554,33 @@
 	        }
 	    });
 	    
-	
+	    function checkURL2(urlPattern) {
+	        return window.location.href.indexOf(urlPattern) > -1;
+	    }
 
 	    // Function to display the modal
 	    function displayNewPasswordModal() {
-	        var NewPasswordModal = document.getElementById("NewPasswordModal");
-	        if (NewPasswordModal) {
-	            var myModal = new bootstrap.Modal(NewPasswordModal);
+	        var newPasswordModal = document.getElementById("newPasswordModal");
+	        if (newPasswordModal) {
+	            var myModal = new bootstrap.Modal(newPasswordModal);
 	            myModal.show();
-	        }else{
-	        	displayModal();
 	        }
 	    }
 
-	    // Check if session status is 'matched' and display the modal
+	    // Check if the current URL matches the desired pattern and display the modal
 	    document.addEventListener("DOMContentLoaded", function() {
-	        if (checkSessionStatus()) {
+	    	var status=/*[[${session.status}]]*/ 'default';
+	    	console.log("Status from Spring Boot: " + status);
+	        var urlPattern = "/checkOtp"; // Change this to your desired URL pattern
+	        if (checkURL2(urlPattern) && status === "matched") {
 	            displayNewPasswordModal();
 	        }
+	        if(checkURL2(urlPattern) && status === "mismatch"){
+	        	
+	        	  displayModal();
+	        }
+	        
 	    });
-	
-	    
-	    
-	    
-	    
 	    
 	    
 	  </script>

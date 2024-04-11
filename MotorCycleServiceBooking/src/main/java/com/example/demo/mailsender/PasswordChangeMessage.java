@@ -34,7 +34,7 @@ public class PasswordChangeMessage {
                     Message.RecipientType.TO,
                     InternetAddress.parse(recipientEmail)
             );
-            message.setSubject("SSTREAM OTP");
+            message.setSubject("Password Changed Successfully");
 
             // Include the OTP in the email body
             message.setText("Your password has been changed successfully.");
