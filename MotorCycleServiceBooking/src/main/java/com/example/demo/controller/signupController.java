@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 
 
+import java.util.Optional;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import com.example.demo.mailsender.PasswordChangeMessage;
 import com.example.demo.mailsender.mailSender;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,10 +34,24 @@ public class signupController {
 	}
 
 	@PostMapping("/register")
-	public String signup(@ModelAttribute User u) {
+	public String signup(@ModelAttribute User u, Model model) {
+		
+		
+		Optional<User> existingUser = uRepo.findByEmail(u.getEmail());
+		if(existingUser.isPresent()) {
+			model.addAttribute("errormessage", "Email already exist! Try new one");
+			return "index.html";
+		}
+		
+	 	Optional<User> existingPhone = uRepo.findByPhone(u.getPhone());
+		    if(existingPhone.isPresent()) {
+		        model.addAttribute("errormessage", "Phone number already exists! Please try a new one.");
+		        return "index.html";
+		    }
 		String hashPwd = DigestUtils.sha3_256Hex(u.getPassword());
 		u.setPassword(hashPwd);
 		uRepo.save(u);
+		model.addAttribute("message", "Signup successful!!");
 		return "index.html";
 	}
 

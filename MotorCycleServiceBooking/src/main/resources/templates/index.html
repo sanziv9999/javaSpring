@@ -662,6 +662,47 @@
     /*]]>*/
 </script>
 
+<script>
+    function validateForm() {
+        var username = document.getElementById('username').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var phoneNo = document.getElementById('phoneNo').value;
+
+        if (username.trim() === "") {
+            alert("Please enter your username.");
+            return false;
+        }
+
+        if (email.trim() === "") {
+            alert("Please enter your email.");
+            return false;
+        }
+
+        if (password.trim() === "") {
+            alert("Please enter your password.");
+            return false;
+        } else if (password.trim().length < 8) {
+            alert("Password must be at least 8 characters long.");
+            return false;
+        } else if (!/(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,}/.test(password)) {
+            alert("Password must contain at least one number, one special character, and one uppercase letter.");
+            return false;
+        }
+
+        if (phoneNo.trim() === "") {
+            alert("Please enter your phone number.");
+            return false;
+        } else if (!/^(97|98)\d{8}$/.test(phoneNo)) {
+            alert("Please enter a valid phone number starting with 98 or 97 and containing 10 digits.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+
 
     
   

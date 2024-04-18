@@ -225,12 +225,12 @@
 		        </div>
 		      </div>
 		      <div class="modal-body">
-		       <form action="register" method="post">
+		       <form action="register" method="post" onsubmit="return validateForm()">
 		  <div class="row mb-3">
 		    <label for="inputSignupUsername" class="col-sm-2 col-form-label">Username</label>
 		    <div class="col-sm-10">
 		      <div class="input-group">
-		        <input type="text" class="form-control" name="username" id="inputusername" required="required">
+		        <input type="text" class="form-control" name="username" id="username" required="required">
 		        <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
 		      </div>
 		    </div>
@@ -239,7 +239,7 @@
 		    <label for="inputSignupEmail" class="col-sm-2 col-form-label">Email</label>
 		    <div class="col-sm-10">
 		      <div class="input-group">
-		        <input type="email" class="form-control" name="email" id="inputSignupEmail" required="required">
+		        <input type="email" class="form-control" name="email" id="email" required="required">
 		        <span class="input-group-text bg-light"><i class="bi bi-envelope-fill"></i></span>
 		      </div>
 		    </div>
@@ -248,7 +248,7 @@
 		    <label for="inputSignupPassword" class="col-sm-2 col-form-label">Password</label>
 		    <div class="col-sm-10">
 		      <div class="input-group">
-		        <input type="password" class="form-control" name="password" id="inputSignupPassword" required="required">
+		        <input type="password" class="form-control" name="password" id="password" required="required">
 		        <button class="btn btn-light" type="button" id="signup-password-toggle">
 		          <i id="signup-password-icon" class="bi bi-eye-slash"></i>
 		        </button>
@@ -259,7 +259,7 @@
 		    <label for="inputSignupPhone" class="col-sm-2 col-form-label">Phone</label>
 		    <div class="col-sm-10">
 		      <div class="input-group">
-		        <input type="text" class="form-control" name="phone" id="inputSignupPhone" required="required">
+		        <input type="text" class="form-control" name="phone" id="phoneNo" required="required">
 		          <span class="input-group-text bg-light"><i class="bi bi-phone"></i></span>
 		
 		      </div>
