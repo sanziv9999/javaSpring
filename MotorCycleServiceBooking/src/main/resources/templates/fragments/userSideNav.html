@@ -47,14 +47,17 @@
         
       </nav>
       
-     <script th:inline="javascript">
-        function removePathVariable() {
-            var url = window.location.href;
-            var indexOfSlash = url.lastIndexOf('/');
-            if (indexOfSlash !== -1) {
-                var cleanUrl = url.substring(0, indexOfSlash);
-                history.replaceState({}, document.title, cleanUrl);
-            }
+    <script th:inline="javascript">
+    function removePathVariable() {
+        var url = window.location.href;
+        var baseUrl = 'http://localhost:8080/';
+        var cleanUrl = baseUrl;
+        var secondIndexOfSlash = url.indexOf('/', baseUrl.length + 1);
+        if (secondIndexOfSlash !== -1) {
+            cleanUrl = url.substring(0, secondIndexOfSlash);
         }
-    </script>
+        history.replaceState({}, document.title, cleanUrl);
+    }
+</script>
+
       </div>

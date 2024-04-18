@@ -281,6 +281,43 @@
   </div>
 </div>
 
+<div th:if="${message!=null}">
+<div class="modal fade custom-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title" id="exampleModalLabel">Login Successful!</h5>
+            </div>
+            <div class="modal-body">
+                <p th:text="${message}"></p>
+        
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div th:if="${errormessage!=null}">
+<div class="modal fade custom-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title" id="exampleModalLabel">Ooops!!</h5>
+            </div>
+            <div class="modal-body">
+              
+                 <p th:text="${errormessage}"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+	
+
 
 
 </div>

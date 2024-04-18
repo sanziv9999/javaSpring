@@ -10,4 +10,8 @@ import com.example.demo.model.ServiceBooking;
 public interface ServiceBookingRepository extends JpaRepository<ServiceBooking, Integer> {
 
 	List<ServiceBooking> findByEmail(String email);
+	
+	
+
+	
 }

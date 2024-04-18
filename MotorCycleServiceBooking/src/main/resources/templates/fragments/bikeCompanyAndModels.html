@@ -79,15 +79,24 @@
 		        </div>
 		      </div>
 		      <div class="modal-body">
-	             <form class="forms-sample" action="bikemodelform" method="post">
+	             <form class="forms-sample" action="bikemodelform" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="exampleInputUsername1">Company name</label>
                       <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Company" name="companyName" required>
+                    </div>
+                      <div class="form-group">
+                      <label for="exampleInputUsername1">Company Logo</label>
+                      <input type="file" class="form-control" name="companyLogo" required>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Model</label>
                       <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Model" name="modelName" required>
                     </div>
+                     <div class="form-group">
+                      <label for="exampleInputBikePic">Bike Picture</label>
+                      <input type="file" class="form-control" name="bikePic" required>
+                    </div>
+                    
                      <div class="form-group">
                       <label for="exampleInputEmail1">Year</label>
                       <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Model" name="year" required>
@@ -116,6 +125,7 @@
                           <th>
                             Company
                           </th>
+                       
                           
                           <th>Action
                           </th>
@@ -124,14 +134,17 @@
                       <tbody>
                         <tr th:each="bmc:${bmcList}">
                           <td th:text="${bmc.id}"></td>
-                          <td th:text="${bmc.companyName}"></td>
+                          <td>
+						        <img th:src="@{'/assets/'+ ${bmc.companyLogo}}" alt="Company Logo" style="width: 50px; height: 50px;">
+						        <span th:text="${bmc.companyName}"></span>
+						    </td>
 						<td>
 						<div class="btn-group" role="group" aria-label="Edit and Delete Buttons">
 						 <a th:href="@{'/statusEdit/'+${bmc.id}}" type="button btn" class="btn btn-sm btn-secondary btn-icon-text">Edit                    
 	                        </a>
                         <a th:href="@{'/deleteData/'+${bmc.id}}" type="button btn" class="btn btn-sm btn-danger btn-icon-text">Delete                       
 	                        </a>
-							</td>	
+						</td>	
 						</div>
 
                         </tr>
@@ -166,7 +179,10 @@
                       <tbody>
                         <tr th:each="bm:${bmList}">
                           <td th:text="${bm.id}"></td>
-                          <td th:text="${bm.modelName}"></td>
+                          <td>
+						        <img th:src="@{'/assets/' + ${bm.bikePic}}" alt="bikePic" style="width: 50px; height: 50px;">
+						        <span th:text="${bm.modelName}"></span>
+						    </td>
                           <td th:text="${bm.year}"></td>
 						<td>
 						<div class="btn-group" role="group" aria-label="Edit and Delete Buttons">

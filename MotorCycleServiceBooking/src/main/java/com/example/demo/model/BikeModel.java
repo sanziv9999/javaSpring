@@ -25,6 +25,8 @@ public class BikeModel {
 	
 	private String modelName;
 	
+	private String bikePic;
+	
 	private int year;
 	
 	
@@ -53,6 +55,12 @@ public class BikeModel {
 	}
 	public void setYear(int year) {
 		this.year = year;
+	}
+	public String getBikePic() {
+		return bikePic;
+	}
+	public void setBikePic(String bikePic) {
+		this.bikePic = bikePic;
 	}
 	
 	

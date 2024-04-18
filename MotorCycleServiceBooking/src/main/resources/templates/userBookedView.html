@@ -15,6 +15,7 @@
     <link rel="stylesheet" th:href="@{/admin/css/vertical-layout-light/style.css}">
     <!-- endinject -->
     <link rel="shortcut icon" th:href="@{/admin/images/favicon.png}">
+     
   </head>
   <body>
     <div class="container-scroller">
@@ -40,11 +41,50 @@
     <script src="admin/js/todolist.js"></script>
     <!-- endinject -->
     <!-- plugin js for this page -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/admin/vendors/progressbar.js/progressbar.min.js"></script>
     <script src="admin/vendors/chart.js/Chart.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- Custom js for this page-->
     <script src="/admin/js/dashboard.js"></script>
     <!-- End custom js for this page-->
+    
+    <script th:inline="javascript">
+
+    function checkURL(urlPattern) {
+        return window.location.href.indexOf(urlPattern) > -1;
+    }
+
+    // Function to display the modal
+    function displayModal() {
+        var BillModal = document.getElementById('BillModal');
+        if (BillModal) {
+            var myModal = new bootstrap.Modal(BillModal);
+            myModal.show();
+        }
+    }
+
+    // Check if the current URL matches the desired pattern and display the modal
+   document.addEventListener("DOMContentLoaded", function() {
+    var urlPattern = "/payBill/"; // Base URL pattern
+
+    // Get the current URL
+    var url = window.location.href;
+
+    // Check if the URL contains the urlPattern
+    if (url.includes(urlPattern)) {
+        // If it does, extract the dynamic part
+        var dynamicPart = url.substring(url.indexOf(urlPattern) + urlPattern.length);
+
+        // Check if the dynamic part is not empty and display the modal
+        if (dynamicPart.trim() !== "") {
+            displayModal();
+        }
+	    }
+	});
+
+
+	</script>
   </body>
 </html>

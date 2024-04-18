@@ -33,9 +33,9 @@ public class ServiceBooking {
 	
 	private String serviceName;
 	
-	
-	
 	private String status;
+	
+	private String payment;
 	
 
 	public int getId() {
@@ -126,6 +126,14 @@ public class ServiceBooking {
 
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
+	}
+
+	public String getPayment() {
+		return payment;
+	}
+
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
 	
 	

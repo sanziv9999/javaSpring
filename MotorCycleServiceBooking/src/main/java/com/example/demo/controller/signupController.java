@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.List;
+
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.mailsender.PasswordChangeMessage;
 import com.example.demo.mailsender.mailSender;
@@ -20,7 +18,7 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
+
 
 @Controller
 public class signupController {
@@ -48,6 +46,7 @@ public class signupController {
 			if (username != null) {
 				session.setAttribute("role", role);
 				model.addAttribute("email", u.getEmail());
+				model.addAttribute("message", "Login successful! Please click on dashborad.");
 				session.setAttribute("email", u.getEmail());
 				session.setAttribute("username", username);
 
@@ -55,9 +54,10 @@ public class signupController {
 				System.out.println(session.getAttribute("email"));
 				return "index.html";
 			}
+			
 
 		}
-
+		model.addAttribute("errormessage", "Username or password incorrect. Please try again!");
 		return "index.html";
 	}
 

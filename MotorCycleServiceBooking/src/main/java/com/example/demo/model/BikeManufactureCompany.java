@@ -27,6 +27,9 @@ public class BikeManufactureCompany {
 	private List<BikeModel> ModelList;
 	
 	
+	private String companyLogo;
+	
+	
 	
 	
 	public int getId() {
@@ -46,6 +49,12 @@ public class BikeManufactureCompany {
 	}
 	public void setModelList(List<BikeModel> modelList) {
 		ModelList = modelList;
+	}
+	public String getCompanyLogo() {
+		return companyLogo;
+	}
+	public void setCompanyLogo(String companyLogo) {
+		this.companyLogo = companyLogo;
 	}
 	
 	

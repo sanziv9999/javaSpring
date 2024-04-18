@@ -119,7 +119,7 @@
                 <i class="typcn typcn-cog text-primary"></i>
                 Settings
                 </a>
-                <a  href="logout" class="dropdown-item">
+                <a  href="logout" class="dropdown-item" onclick="removePathVariable()">
                 <i class="typcn typcn-power text-primary"></i>
                 Logout
                 </a>
@@ -131,5 +131,16 @@
           </button>
         </div>
       </nav>
+      
+      <script th:inline="javascript">
+        function removePathVariable() {
+            var url = window.location.href;
+            var indexOfSlash = url.lastIndexOf('/');
+            if (indexOfSlash !== -1) {
+                var cleanUrl = url.substring(0, indexOfSlash);
+                history.replaceState({}, document.title, cleanUrl);
+            }
+        }
+    </script>
       
       </div>

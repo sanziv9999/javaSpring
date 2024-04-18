@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.awt.Dialog.ModalExclusionType;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.example.demo.esewaSecurity.SecurityKeyGen;
 import com.example.demo.mailsender.ServiceBookedMail;
 import com.example.demo.mailsender.mailSender;
 import com.example.demo.model.BikeManufactureCompany;
@@ -161,7 +164,7 @@ public class ServiceBookingForm {
 		}
 		
 		List<ServiceBooking> sbList = sbRepo.findByEmail((String) session.getAttribute("email"));
-		model.addAttribute("sbList",sbList);
+		model.addAttribute("sloibList",sbList);
 		return "userBookedView.html";
 	}
 	
@@ -249,6 +252,47 @@ public class ServiceBookingForm {
 		
 		return "serviceDetails.html";
 	}
+	
+	@GetMapping("/payBill/{id}/{serviceName}")
+	public String payBill(@PathVariable String serviceName, HttpSession session, Model model){
+		ServiceSubCategory ssc = sscRepo.findByServiceName(serviceName);
+		if(ssc!=null) {
+			
+			String key="8gBm/:&EnhH.1/q";
+			String uuid = UUID.randomUUID().toString();
+			int price= (int)ssc.getPrice();
+			String totalPrice =String.valueOf(price);
+			String message = "total_amount=" + totalPrice + ",transaction_uuid=" + uuid + ",product_code=" + serviceName;
+
+			
+			String message1 = "total_amount=100,transaction_uuid=11-201-13,product_code=EPAYTEST";
+			String signature = new SecurityKeyGen().generateHmacSha256(key, message);
+			System.out.println(signature);
+			
+			
+			session.setAttribute("id",uuid );
+			session.setAttribute("serviceName", serviceName);
+			session.setAttribute("price",totalPrice );
+			session.setAttribute("signature", signature);
+			session.setAttribute("fieldName", message);
+			System.out.println(totalPrice);
+			
+			
+			List<ServiceBooking> sbList = sbRepo.findByEmail((String) session.getAttribute("email"));
+			
+			model.addAttribute("sbList",sbList);
+			
+			List<WorkStatus> wsList = wsRepo.findAll();
+			model.addAttribute("wsList", wsList);
+			
+			return "userBookedView.html";
+		}
+		
+		return "userBookedView.html";
+	}
+	
+	
+	
 	
 	
 	

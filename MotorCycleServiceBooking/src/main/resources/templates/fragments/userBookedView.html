@@ -61,76 +61,121 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
+           <br>
+           <br> 
+		  <div  th:each="sb:${sbList}" class="card mb-3" >
+		  <div class="row g-0">
+		    <div class="col-md-4">
+		      <img src="..." class="img-fluid rounded-start" alt="...">
+		    </div>
+		     <div class="col-md-8">
+                <!-- Your card body -->
                 <div class="card-body">
-                  <h4 class="card-title">Service Booked List</h4>
-                  <div class="table-responsive pt-3">
-                    <table class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <th>
-                            id
-                          </th>
-                          <th>
-                            Username
-                          </th>
-                          <th>
-                            Email
-                          </th>
-                          <th>
-                            Bike Company
-                          </th>
-                          <th>
-                            Bike Model
-                          </th>
-                          <th>
-                            Vehicle No
-                          </th>
-                          <th>
-                            Applied Date
-                          </th>
-                          <th>
-                            Booked Date
-                          </th>
-                            <th>
-                            Service Type
-                          </th>  
-                          <th>
-                            Service Name
-                          </th>
-                          <th>
-                            Status
-                          </th>
-                          <th>Action
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr th:each="sb:${sbList}">
-                          <td th:text="${sb.id}"></td>
-                          <td th:text="${sb.username}"></td>
-                          <td th:text="${sb.email}"></td>
-                          <td th:text="${sb.companyName}"></td>
-                          <td th:text="${sb.bikeModel}"></td>
-                          <td th:text="${sb.vehicleNo}"></td>
-                          <td th:text="${sb.appliedDate}"></td>
-                          <td th:text="${sb.date}"></td>
-                          <td th:text="${sb.serviceType}"></td>
-                          <td th:text="${sb.serviceName}"></td>
-       					<td th:text="${sb.status}"></td>
-						<td >
-						 <a th:href="@{'/cancelBooking/'+${sb.id}}" type="button btn" class="btn btn-danger btn-icon-text">Cancel Booking                          
-                        </a>
-						</td>	
+                    <!-- Title column -->
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title" th:text="${sb.serviceName}">Service Name</h5>
+                        </div>
+                    </div>
+                    <!-- Content columns -->
+                    <div class="row">
+                        <div class="col">
+                       		<p>
+                                <b>Booked Id:</b> <span class="card-text" th:text="${sb.id}"></span>
+                            </p>
+                             <p>
+                                <b>Username:</b> <span class="card-text" th:text="${sb.username}"></span>
+                            </p>
+                             <p>
+                                <b>Email:</b> <span class="card-text" th:text="${sb.email}"></span>
+                            </p>
+                             <p>
+                                <b>Service Type:</b> <span class="card-text" th:text="${sb.serviceType}"></span>
+                            </p>
+                             <p>
+                                <b>Vehicle No:</b> <span class="card-text" th:text="${sb.vehicleNo}"></span>
+                            </p>
+                            
+                        </div>
+                        <div class="col">
+                            <!-- Second column content -->
+                             <p>
+                                <b>Booked For:</b> <span class="card-text" th:text="${sb.date}"></span>
+                            </p>
+                             <p>
+                                <b>Company:</b> <span class="card-text" th:text="${sb.companyName}"></span>
+                            </p>
+                             <p>
+                                <b>Bike Model:</b> <span class="card-text" th:text="${sb.bikeModel}"></span>
+                            </p>
+                             <p>
+                                <b>Service Status:</b> <span class="card-text" th:text="${sb.status}"></span>
+                            </p>
+                            <p class="card-text">
+                              <b>Applied on: </b><span class="text-body-secondary" th:text="${sb.appliedDate}"></span>
+                            </p>
+                            
+                          <div class="row">
+						    <div class="col">
+							        <a th:href="@{'/cancelBooking/'+${sb.id}}" class="btn btn-danger btn-icon-text btn-md" role="button">Cancel</a>
+						    </div>
+						    <div class="col">
+						        <a th:href="@{'/payBill/'+${sb.id}+'/'+${sb.serviceName}}" class="btn btn-success btn-icon-text btn-md" role="button">Pay Bill</a>
+						    </div>
+						</div>
 
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
+        </div>
+		</div>
+		
+		<div class="modal fade" id="BillModal" tabindex="-1" aria-labelledby="BillLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header bg-primary">
+		        <div class="d-flex justify-content-between align-items-center w-100">
+		          <h1 class="modal-title text-center w-100 fs-5 text-white">Bill</h1>
+		          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        </div>
+		      </div>
+		      
+		      <div class="modal-body">
+			    <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="post">
+			        <p><b>Note:</b> You can only pay through e-sewa for instance </p>
+			        <div class="row mb-3">
+			            <p>
+			                <b>Service Type:</b> <span class="card-text" th:text="${session.serviceName}"></span>
+			            </p>
+			            <p>
+			                <b>Total Cost:</b> <span class="card-text" th:text="${session.price}"></span>
+			            </p>
+			        </div>
+			        <input type="text" id="amount" name="amount" th:value="${session.price}" required>
+			        <input type="text" id="tax_amount" name="tax_amount" value="0" required>
+			        <input type="text" id="total_amount" name="total_amount" th:value="${session.price}" required>
+			        <input type="text" id="transaction_uuid" name="transaction_uuid" th:value="${session.id}" required>
+			        <input type="text" id="product_code" name="product_code" th:value="${session.serviceName}" required>
+			        <input type="text" id="product_service_charge" name="product_service_charge" value="0" required>
+			        <input type="text" id="product_delivery_charge" name="product_delivery_charge" value="0" required>
+			        <input type="text" id="success_url" name="success_url" th:value="'https://esewa.com.np'" required>
+			        <input type="text" id="failure_url" name="failure_url" th:value="'https://google.com'" required>
+			        <input type="text" id="signed_field_names" name="signed_field_names" th:value="${session.fieldName}" required>
+			        <input type="text" id="signature" name="signature" th:value="${session.signature}" required>
+		          
+			        <div class="row">
+			            <div class="col text-center">
+			                <br><br>
+			                <button type="submit" class="btn btn-primary col-md-4">Send</button>
+			                <br><br>
+			            </div>
+			        </div>
+			    </form>
+			</div>
+
+
                     
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -141,7 +186,7 @@
           <!-- partial -->
         </div>
       </div>
-      
+
 
         
         </div>
