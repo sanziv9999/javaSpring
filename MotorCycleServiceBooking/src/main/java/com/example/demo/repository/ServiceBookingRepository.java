@@ -12,6 +12,8 @@ public interface ServiceBookingRepository extends JpaRepository<ServiceBooking, 
 	List<ServiceBooking> findByEmail(String email);
 	
 	
+	long count();
+	
 
 	
 }

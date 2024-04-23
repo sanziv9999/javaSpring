@@ -11,4 +11,5 @@ public interface BikeManufactureCompanyRepository extends JpaRepository<BikeManu
 	Optional<BikeManufactureCompany> findByCompanyName(String companyName);
 	
 
+	long count();
 }

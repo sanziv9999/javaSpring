@@ -10,4 +10,6 @@ public interface ServiceTypeRepository extends JpaRepository<ServiceType, Intege
 
 	Optional<ServiceType> findByServiceType(String serviceType);
 
+	
+	long count();
 }

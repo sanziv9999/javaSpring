@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.mailsender.PasswordChangeMessage;
 import com.example.demo.mailsender.mailSender;
 import com.example.demo.model.User;
+import com.example.demo.repository.ServiceBookingRepository;
+import com.example.demo.repository.StockAndProductsRepository;
 import com.example.demo.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
@@ -27,6 +29,12 @@ import jakarta.servlet.http.HttpSession;
 public class signupController {
 	@Autowired
 	private UserRepository uRepo;
+	
+	@Autowired
+	private ServiceBookingRepository sbRepo;
+	
+	@Autowired
+	private StockAndProductsRepository sapRepo;
 
 	@GetMapping("/")
 	public String landing() {
@@ -84,6 +92,10 @@ public class signupController {
 
 		if (session.getAttribute("username") != null && session.getAttribute("role").equals("admin")) {
 			String username = (String) session.getAttribute("username");
+			session.setAttribute("totalBookings", sbRepo.count());
+			session.setAttribute("totalStocks", sapRepo.count());
+			session.setAttribute("totalStockPrice", sapRepo.calculateTotalStockPrice());
+			
 			model.addAttribute(username, username);
 			return "adminDash.html";
 		} else {

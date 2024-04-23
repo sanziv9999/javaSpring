@@ -14,4 +14,6 @@ public interface BikeModelRepository extends JpaRepository<BikeModel, Integer> {
 	List<BikeModel> findByCompanyId(int id);
 	
 
+	long count();
+	
 }

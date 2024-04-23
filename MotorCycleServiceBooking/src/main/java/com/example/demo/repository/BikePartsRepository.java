@@ -7,6 +7,6 @@ import com.example.demo.model.BikeParts;
 public interface BikePartsRepository extends JpaRepository<BikeParts, Integer> {
 
 	
-	
+	long count();
 	
 }

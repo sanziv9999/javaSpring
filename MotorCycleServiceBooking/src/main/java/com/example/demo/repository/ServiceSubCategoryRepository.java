@@ -6,4 +6,7 @@ import com.example.demo.model.ServiceSubCategory;
 
 public interface ServiceSubCategoryRepository extends JpaRepository<ServiceSubCategory, Integer> {
 	ServiceSubCategory  findByServiceName(String serviceName);
+	
+	long count();
+	
 }
