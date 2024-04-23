@@ -69,6 +69,7 @@ public class signupController {
 
 				System.out.println(session.getAttribute("role"));
 				System.out.println(session.getAttribute("email"));
+				session.setMaxInactiveInterval(1800);
 				return "index.html";
 			}
 			
@@ -81,11 +82,12 @@ public class signupController {
 	@GetMapping("/adminDash")
 	public String dashboard(HttpSession session, Model model) {
 
-		if (session.getAttribute("username") != null) {
+		if (session.getAttribute("username") != null && session.getAttribute("role").equals("admin")) {
 			String username = (String) session.getAttribute("username");
 			model.addAttribute(username, username);
 			return "adminDash.html";
 		} else {
+			model.addAttribute("errormessage", "Admin can only access this page");
 			return "index.html";
 		}
 
@@ -93,21 +95,22 @@ public class signupController {
 
 	@GetMapping("dashboard")
 	public String dashborad(HttpSession session, Model model) {
-		if (session.getAttribute("username") != null) {
+		if (session.getAttribute("username") != null && session.getAttribute("role").equals("customer")) {
 
 			String username = (String) session.getAttribute("username");
 			model.addAttribute(username, username);
 			return "userdash.html";
 
 		} else {
+			model.addAttribute("errormessage", "Customer can only access this page");
 			return "index.html";
 		}
 	}
 
 	@GetMapping("logout")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-
+		model.addAttribute("message", "You have been logged out successfully.");
 		return "index.html";
 
 	}

@@ -5,11 +5,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,7 @@ public class bikeModelController {
 
     @Autowired
     private BikeManufactureCompanyRepository bmcRepo;
+	
 
     @GetMapping("/addbikemodel")
     public String bikemodel() {
@@ -40,7 +43,7 @@ public class bikeModelController {
                                  @RequestParam("modelName") String modelName,
                                  @RequestParam("year") Integer year,
                                  @RequestParam("companyLogo") MultipartFile companyLogo, 
-                                 @RequestParam("bikePic") MultipartFile bikePic) {
+                                 @RequestParam("bikePic") MultipartFile bikePic, Model model1) {
 
         Optional<BikeManufactureCompany> existingCompanyOptional = bmcRepo.findByCompanyName(companyName);
 
@@ -89,8 +92,13 @@ public class bikeModelController {
                 e.printStackTrace();
             }
         }
+        List<BikeManufactureCompany> bmcList=bmcRepo.findAll();
+		model1.addAttribute("bmcList", bmcList);
+		
+		List<BikeModel> bmList = bmRepo.findAll();
+		model1.addAttribute("bmList", bmList);
         
-        return "BikeModel.html"; // Redirect to the add bike model page after form submission
+        return "bikeCompany.html"; // Redirect to the add bike model page after form submission
     }
 
 }

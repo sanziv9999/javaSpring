@@ -17,6 +17,7 @@ public class User {
 	private String username;
 	private String phone;
 	private String role;
+	private String profilePic;
 	
 	public int getId() {
 		return id;
@@ -53,6 +54,12 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public String getProfilePic() {
+		return profilePic;
+	}
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 	
 	

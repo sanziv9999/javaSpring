@@ -48,6 +48,49 @@
     <!-- Custom js for this page-->
     <script src="/admin/js/dashboard.js"></script>
     <script th:src="@{/js/urlreset.js}"></script>
+    <!-- Add jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	    $(document).ready(function() {
+	        // Pagination
+	        var rowsPerPage = 4;
+	        var table = $('#dataTable');
+	        var rows = table.find('tbody tr');
+	        var pageCount = Math.ceil(rows.length / rowsPerPage);
+	        var currentPage = 1;
+	
+	        function showPage(page) {
+	            var start = (page - 1) * rowsPerPage;
+	            var end = start + rowsPerPage;
+	            rows.hide();
+	            rows.slice(start, end).show();
+	        }
+	
+	        // Show first page initially
+	        showPage(currentPage);
+	
+	        // Handle pagination clicks
+	        $('.pagination').on('click', 'a', function(e) {
+	            e.preventDefault();
+	            currentPage = parseInt($(this).text());
+	            showPage(currentPage);
+	        });
+	
+	        // Generate pagination links dynamically
+	        for (var i = 1; i <= pageCount; i++) {
+	            $('.pagination').append('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
+	        }
+	
+	        // Search functionality
+	        $('#searchInput').keyup(function() {
+	            var searchText = $(this).val().toLowerCase();
+	            rows.hide().filter(function() {
+	                return $(this).text().toLowerCase().indexOf(searchText) !== -1;
+	            }).show();
+	        });
+	    });
+	</script>
+    
 
  
     

@@ -66,7 +66,7 @@
 		  <div  th:each="sb:${sbList}" class="card mb-3" >
 		  <div class="row g-0">
 		    <div class="col-md-4">
-		      <img src="..." class="img-fluid rounded-start" alt="...">
+		      <img th:src="@{'/assets/'+ ${sb.serviceImg}}"  alt="${sb.serviceImg}" style="height: 200px;">
 		    </div>
 		     <div class="col-md-8">
                 <!-- Your card body -->

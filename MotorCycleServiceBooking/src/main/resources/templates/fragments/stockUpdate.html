@@ -1,4 +1,4 @@
-<div th:fragment="StockManagement">
+<div th:fragment="updateStock">
     <div class="container-fluid page-body-wrapper">
 
 
@@ -39,16 +39,11 @@
           <div class="row">
           
           
-          <div class="col-lg-12 grid-margin ">
-		    <div class="d-flex justify-content-end">
-		        <a href="#" data-bs-toggle="modal" data-bs-target="#AddStockModal" class="btn btn-primary btn-sm" >Add</a>
-		    </div>
-			</div>
+         
 		
-	<div class="container">
-    <!-- Loop through your items -->
-    <div class="row">
-        <div th:each="sp, stat : ${spList}" class="col-md-4 mb-4">
+			<div class="container">
+    		<div class="row">
+        	<div th:each="sp, stat : ${spList}" class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm">
                 <div class="position-relative">
                     <img class="card-img-top img-fluid" th:src="@{'/assets/' + ${sp.itemPic}}" alt="${sp.itemPic}" style="height: 200px;">
@@ -83,7 +78,8 @@
                 <div class="card-footer bg-transparent border d-flex justify-content-between">
                     <a th:href="@{'/stockEdit/'+${sp.id}}" class="btn btn-sm btn-secondary">Edit</a>
                     <a th:href="@{'/stockDelete/'+${sp.id}}" class="btn btn-sm btn-danger">Delete</a>
-                  
+                   <!-- Add button passing the ID to JavaScript function -->
+					<a th:href="@{'/stockAdd/'+${sp.id}}" class="btn btn-sm btn-success">Add</a>
 
 
                 </div>

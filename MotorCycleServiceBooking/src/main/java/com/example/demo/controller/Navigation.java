@@ -48,6 +48,8 @@ public class Navigation {
 	
 	@GetMapping("/booking")
 	public String booking(){
+		
+		
 		return "booking.html";
 	}
 	

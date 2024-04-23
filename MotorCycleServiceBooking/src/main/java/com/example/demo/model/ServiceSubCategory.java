@@ -18,6 +18,7 @@ public class ServiceSubCategory {
 	
 	private String serviceName;
 	private float price;
+	private String serviceImg;
 	
 	
 	
@@ -49,6 +50,12 @@ public class ServiceSubCategory {
 	}
 	public void setType(ServiceType type) {
 		Type = type;
+	}
+	public String getServiceImg() {
+		return serviceImg;
+	}
+	public void setServiceImg(String serviceImg) {
+		this.serviceImg = serviceImg;
 	}
 	
 	

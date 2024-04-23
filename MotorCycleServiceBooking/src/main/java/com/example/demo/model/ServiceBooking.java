@@ -33,6 +33,8 @@ public class ServiceBooking {
 	
 	private String serviceName;
 	
+	private String serviceImg;
+	
 	private String status;
 	
 	private String payment;
@@ -135,6 +137,16 @@ public class ServiceBooking {
 	public void setPayment(String payment) {
 		this.payment = payment;
 	}
+
+	public String getServiceImg() {
+		return serviceImg;
+	}
+
+	public void setServiceImg(String serviceImg) {
+		this.serviceImg = serviceImg;
+	}
+	
+	
 	
 	
 	

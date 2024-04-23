@@ -67,7 +67,14 @@ public class ServiceBookingForm {
 	@GetMapping("book")
 	public String homePageBook(Model model, HttpSession session){
 		String username = (String) session.getAttribute("username");
-		return "servicebookingForm.html";
+		if(session.getAttribute("role").equals("customer")) {
+			model.addAttribute("message","Welcome");
+			return "servicebookingForm.html";
+		}else {
+			model.addAttribute("errormessage","Please login first.");
+			return "index.html";
+		}
+		
 	}
 	
 	
@@ -97,7 +104,7 @@ public class ServiceBookingForm {
 	}
 	
 	@PostMapping("/serviceBook")
-	public String serviceBook(Model model, @ModelAttribute ServiceBooking sb, HttpSession session, @RequestParam("date") String date){
+	public String serviceBook(Model model, @ModelAttribute ServiceBooking sb, HttpSession session, @RequestParam("date") String date, @RequestParam("serviceName") String serviceName){
 		List<BikeManufactureCompany> bmcList=bmcRepo.findAll();
 		model.addAttribute("bmcList", bmcList);
 		
@@ -110,6 +117,12 @@ public class ServiceBookingForm {
 		
 		List<ServiceSubCategory> sscList = sscRepo.findAll();
 		model.addAttribute("sscList", sscList);
+		
+		ServiceSubCategory subCat = sscRepo.findByServiceName(serviceName);
+		
+		if(subCat!=null) {
+			sb.setServiceImg(subCat.getServiceImg());
+		}
 		
 		String email = (String) session.getAttribute("email");
 		
