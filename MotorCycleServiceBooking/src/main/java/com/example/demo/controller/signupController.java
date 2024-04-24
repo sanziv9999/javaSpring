@@ -92,6 +92,7 @@ public class signupController {
 
 		if (session.getAttribute("username") != null && session.getAttribute("role").equals("admin")) {
 			String username = (String) session.getAttribute("username");
+			System.out.println(session.getAttribute("email"));
 			session.setAttribute("totalBookings", sbRepo.count());
 			session.setAttribute("totalStocks", sapRepo.count());
 			session.setAttribute("totalStockPrice", sapRepo.calculateTotalStockPrice());
@@ -122,7 +123,7 @@ public class signupController {
 	@GetMapping("logout")
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-		model.addAttribute("message", "You have been logged out successfully.");
+		model.addAttribute("logoutMessage", "You have been logged out successfully.");
 		return "index.html";
 
 	}
@@ -180,6 +181,21 @@ public class signupController {
 		  
 		  
 	  }
+	  
+	  @GetMapping("editProfile")
+	  
+	  public String profileChange() {
+		  return "";
+	  }
+	  
+	  
+	  @PostMapping("editProfile")
+	  public String changeProfile(){
+		  return "";
+	  }
+	  
+	  
+	  
 	 
 
 }

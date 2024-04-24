@@ -14,6 +14,9 @@ public interface ServiceBookingRepository extends JpaRepository<ServiceBooking, 
 	
 	long count();
 	
+	 @Query("SELECT s.status FROM ServiceBooking s WHERE s.email = ?1")
+    String findStatusByEmail(String email);
+	
 
 	
 }

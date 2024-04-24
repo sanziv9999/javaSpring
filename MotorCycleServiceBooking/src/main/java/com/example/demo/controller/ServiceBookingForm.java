@@ -105,6 +105,9 @@ public class ServiceBookingForm {
 	
 	@PostMapping("/serviceBook")
 	public String serviceBook(Model model, @ModelAttribute ServiceBooking sb, HttpSession session, @RequestParam("date") String date, @RequestParam("serviceName") String serviceName){
+		String email = (String) session.getAttribute("email");
+		sbRepo.findStatusByEmail(email);
+		
 		List<BikeManufactureCompany> bmcList=bmcRepo.findAll();
 		model.addAttribute("bmcList", bmcList);
 		
@@ -124,7 +127,9 @@ public class ServiceBookingForm {
 			sb.setServiceImg(subCat.getServiceImg());
 		}
 		
-		String email = (String) session.getAttribute("email");
+		
+		
+		
 		
 		sbRepo.save(sb);
 		new ServiceBookedMail().sendBookedMessage(email, date);
