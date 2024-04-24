@@ -106,7 +106,9 @@ public class ServiceBookingForm {
 	@PostMapping("/serviceBook")
 	public String serviceBook(Model model, @ModelAttribute ServiceBooking sb, HttpSession session, @RequestParam("date") String date, @RequestParam("serviceName") String serviceName){
 		String email = (String) session.getAttribute("email");
-		sbRepo.findStatusByEmail(email);
+		if(sbRepo.findStatusByEmail(email)!="completed") {
+			
+		
 		
 		List<BikeManufactureCompany> bmcList=bmcRepo.findAll();
 		model.addAttribute("bmcList", bmcList);
@@ -128,14 +130,30 @@ public class ServiceBookingForm {
 		}
 		
 		
-		
-		
-		
 		sbRepo.save(sb);
 		new ServiceBookedMail().sendBookedMessage(email, date);
 		
 		
+		model.addAttribute("message", "Service have been booked successfully!");
+		
 		return "serviceBookingForm.html";
+		}else {
+			List<BikeManufactureCompany> bmcList=bmcRepo.findAll();
+			model.addAttribute("bmcList", bmcList);
+			
+			List<BikeModel> bmList = bmRepo.findAll();
+			model.addAttribute("bmList", bmList);
+			
+			List<ServiceType> stList = stRepo.findAll();
+			model.addAttribute("stList", stList );
+			
+			
+			List<ServiceSubCategory> sscList = sscRepo.findAll();
+			model.addAttribute("sscList", sscList);
+			
+			model.addAttribute("errormessage", "Your previous service haven't been complted");
+			return "serviceBookingForm.html";
+		}
 		
 	}
 	
